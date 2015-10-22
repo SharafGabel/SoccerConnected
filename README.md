@@ -4,9 +4,9 @@ SoccerConnected est une application Android proposant des services liés au doma
 
 # Équipe
 
-Yacine Chakour</br>
-Karima Bel-Hyad
-Mathieu Lioret
-Kévin Dumouchel
-Sharaf Gabel
+Yacine Chakour </br>
+Karima Bel-Hyad </br>
+Mathieu Lioret </br> 
+Kévin Dumouchel </br>
+Sharaf Gabel </br>
 
