@@ -39,8 +39,9 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * Created by Sharaf on 16/11/2015.
  */
+
 public class LoginActivity extends AppCompatActivity{
-//toto
+
     // Lien vers votre page php sur votre serveur
     private static final String	UPDATE_URL	= "https://github.com/SharafGabel/SoccerConnected/blob/TestAPP/app/src/main/java/scriptPHP/login.php";
 
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity{
         progressDialog.setMessage("Please wait...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
+
         // Récupération des éléments de la vue définis dans le xml
         UserEditText = (EditText) findViewById(R.id.username);
 

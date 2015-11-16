@@ -13,7 +13,7 @@
         if (!@mysql_connect('mysql-pwm1cl.alwaysdata.net', 'pwm1cl', 'pwm1cl')) { error(1); }
 
 	// database représente le nom d ela base de données
-	    if (!mysql_select_db('database')) { error(2); }
+	    if (!mysql_select_db('pwm1cl_footdb')) { error(2); }
 
         if(get_magic_quotes_gpc()) {
             $login = stripslashes($_POST['username']);
