@@ -42,7 +42,7 @@ import javax.xml.parsers.SAXParserFactory;
 public class LoginActivity extends AppCompatActivity{
 
     // Lien vers votre page php sur votre serveur
-    private static final String	UPDATE_URL	= "http://paddesite.pa.ohost.de/login.php";
+    private static final String	UPDATE_URL	= "https://github.com/SharafGabel/SoccerConnected/blob/TestAPP/app/src/main/java/scriptPHP/login.php";
 
     public ProgressDialog progressDialog;
 
