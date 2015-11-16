@@ -10,7 +10,7 @@
     // user représente le nom d'utilisateur de la base de données.
     // pass est le mot de passe pour accéder à cette base de données avec cette
 	// utilisateur.
-        if (!@mysql_connect('host', 'user', 'pass')) { error(1); }
+        if (!@mysql_connect('mysql-pwm1cl.alwaysdata.net', 'pwm1cl', 'pwm1cl')) { error(1); }
 
 	// database représente le nom d ela base de données
 	    if (!mysql_select_db('database')) { error(2); }
