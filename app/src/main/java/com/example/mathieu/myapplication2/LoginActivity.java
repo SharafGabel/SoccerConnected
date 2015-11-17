@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -43,13 +44,16 @@ import javax.xml.parsers.SAXParserFactory;
 public class LoginActivity extends AppCompatActivity{
 
     // Lien vers votre page php sur votre serveur
-    private static final String	UPDATE_URL	= "https://github.com/SharafGabel/SoccerConnected/blob/TestAPP/app/src/main/java/scriptPHP/login.php";
+    private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.php";
 
     public ProgressDialog progressDialog;
 
     private EditText UserEditText;
 
     private EditText PassEditText;
+
+    private TextView Toto;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -67,6 +71,9 @@ public class LoginActivity extends AppCompatActivity{
         UserEditText = (EditText) findViewById(R.id.username);
 
         PassEditText = (EditText) findViewById(R.id.password);
+
+        Toto = (TextView) findViewById(R.id.toto);
+
         Button button = (Button) findViewById(R.id.okbutton);
 
         // Définition du listener du bouton
@@ -75,7 +82,6 @@ public class LoginActivity extends AppCompatActivity{
 
             public void onClick(View v)
             {
-
                 int usersize = UserEditText.getText().length();
 
                 int passsize = PassEditText.getText().length();
@@ -169,7 +175,7 @@ public class LoginActivity extends AppCompatActivity{
                     HashMap<String,String> map = new HashMap<String,String>();
                     map.put("username",login);
                     map.put("password", pw);
-
+                    Toto.setText("En cours...");
                     writer.write(getPostDataString(map));
                     writer.flush();
                     writer.close();
@@ -184,10 +190,12 @@ public class LoginActivity extends AppCompatActivity{
                             sb.append((char)cp);
                         }
                         json= sb.toString();
+                        Toto.setText(json);
                     }
                     else
                     {
                         json="Erreur ";
+                        Toto.setText(json);
                     }
 
                 } catch (IOException e) {
