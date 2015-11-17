@@ -44,7 +44,7 @@ import javax.xml.parsers.SAXParserFactory;
 public class LoginActivity extends AppCompatActivity{
 
     // Lien vers votre page php sur votre serveur
-    private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.php";
+    private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/2.php";
 
     public ProgressDialog progressDialog;
 
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.main);
 
         // initialisation d'une progress bar
-        progressDialog = new ProgressDialog(this);
+       progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
@@ -165,15 +165,15 @@ public class LoginActivity extends AppCompatActivity{
 
                 Looper.prepare();
                 try {
-                    HttpURLConnection connection = (HttpURLConnection)new URL(UPDATE_URL).openConnection();
+                    URL url = new URL(UPDATE_URL);
+                    HttpURLConnection connection = (HttpURLConnection)url.openConnection();
                     connection.setDoOutput(true);
-                    connection.setChunkedStreamingMode(0);
-                    connection.setRequestMethod("POST");
+                    //connection.setRequestMethod("POST");
 
                     OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
                     HashMap<String,String> map = new HashMap<String,String>();
-                    map.put("username",login);
+                    map.put("username", login);
                     map.put("password", pw);
                     Toto.setText("En cours...");
                     writer.write(getPostDataString(map));
