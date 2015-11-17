@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity{
     private EditText UserEditText;
 
     private EditText PassEditText;
-
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
 
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity{
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
 
         // Récupération des éléments de la vue définis dans le xml
         UserEditText = (EditText) findViewById(R.id.username);
