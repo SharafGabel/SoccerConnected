@@ -3,8 +3,10 @@ package com.example.mathieu.myapplication2;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -47,6 +49,32 @@ public class ConnexionHTTP {
 
 
         return 0;
+    }
+
+    public String selectionData(String url,String table,HashMap data) throws IOException {
+
+        HttpURLConnection connection =  this.connect(url);
+        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+        data.put("table",table);
+        writer.write(getPostDataString(data));
+        writer.flush();
+        writer.close();
+
+        int responseCode = connection.getResponseCode();
+        if(responseCode == HttpURLConnection.HTTP_OK)
+        {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder sb=new StringBuilder();
+            String line=null;
+            while( (line=in.readLine())!=null)
+            {
+                sb.append(line);
+            }
+            return sb.toString();
+
+        }
+        else
+            return "erreur";
     }
 
 
