@@ -1,5 +1,8 @@
 package com.example.mathieu.myapplication2;
 
+import android.content.Context;
+import android.support.v7.app.AlertDialog;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
