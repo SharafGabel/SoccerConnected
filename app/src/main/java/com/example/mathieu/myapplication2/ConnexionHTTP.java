@@ -47,7 +47,6 @@ public class ConnexionHTTP {
         writer.flush();
         writer.close();
 
-
         return 0;
     }
 
@@ -71,12 +70,10 @@ public class ConnexionHTTP {
                 sb.append(line);
             }
             return sb.toString();
-
         }
         else
             return "erreur";
     }
-
 
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
@@ -91,7 +88,6 @@ public class ConnexionHTTP {
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
-
         return result.toString();
     }
 
