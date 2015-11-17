@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -26,7 +25,6 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,15 +42,13 @@ import javax.xml.parsers.SAXParserFactory;
 public class LoginActivity extends AppCompatActivity{
 
     // Lien vers votre page php sur votre serveur
-    private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/2.php";
+    private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.1.php";
 
     public ProgressDialog progressDialog;
 
     private EditText UserEditText;
 
     private EditText PassEditText;
-
-    private TextView Toto;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -71,8 +67,6 @@ public class LoginActivity extends AppCompatActivity{
         UserEditText = (EditText) findViewById(R.id.username);
 
         PassEditText = (EditText) findViewById(R.id.password);
-
-        Toto = (TextView) findViewById(R.id.toto);
 
         Button button = (Button) findViewById(R.id.okbutton);
 
@@ -168,15 +162,16 @@ public class LoginActivity extends AppCompatActivity{
                     URL url = new URL(UPDATE_URL);
                     HttpURLConnection connection = (HttpURLConnection)url.openConnection();
                     connection.setDoOutput(true);
-                    //connection.setRequestMethod("POST");
+                    connection.setChunkedStreamingMode(0);
+                    connection.setRequestMethod("POST");
 
                     OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
                     HashMap<String,String> map = new HashMap<String,String>();
                     map.put("username", login);
                     map.put("password", pw);
-
                     writer.write(getPostDataString(map));
+
                     writer.flush();
                     writer.close();
                     String json;
@@ -185,15 +180,19 @@ public class LoginActivity extends AppCompatActivity{
                     {
                         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                         StringBuilder sb=new StringBuilder();
-                        int cp;
-                        while((cp=in.read())!=-1){
-                            sb.append((char)cp);
+                        String line=null;
+                        while( (line=in.readLine())!=null)
+                        {
+                            sb.append(line);
                         }
-                        json= sb.toString();
+                        json = sb.toString();
+                        createDialog("toto",json);
+
                     }
                     else
                     {
                         json="Erreur ";
+                        createDialog("toto","erreur");
                     }
 
                 } catch (IOException e) {
