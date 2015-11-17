@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity{
                     HashMap<String,String> map = new HashMap<String,String>();
                     map.put("username", login);
                     map.put("password", pw);
-                    Toto.setText("En cours...");
+
                     writer.write(getPostDataString(map));
                     writer.flush();
                     writer.close();
@@ -190,12 +190,10 @@ public class LoginActivity extends AppCompatActivity{
                             sb.append((char)cp);
                         }
                         json= sb.toString();
-                        Toto.setText(json);
                     }
                     else
                     {
                         json="Erreur ";
-                        Toto.setText(json);
                     }
 
                 } catch (IOException e) {
