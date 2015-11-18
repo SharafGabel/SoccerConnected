@@ -1,9 +1,12 @@
-package com.example.mathieu.myapplication2;
+package activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.mathieu.myapplication2.LoginActivity;
+import com.example.mathieu.myapplication2.R;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tv;

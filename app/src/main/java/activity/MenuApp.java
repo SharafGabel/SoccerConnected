@@ -1,7 +1,9 @@
-package com.example.mathieu.myapplication2;
+package activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.mathieu.myapplication2.R;
 
 /**
  * Created by Yacine on 17/11/2015.

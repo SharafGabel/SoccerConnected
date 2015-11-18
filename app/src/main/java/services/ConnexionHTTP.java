@@ -1,4 +1,4 @@
-package com.example.mathieu.myapplication2;
+package services;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
