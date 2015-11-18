@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.main);
 
         // initialisation d'une progress bar
-       progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
