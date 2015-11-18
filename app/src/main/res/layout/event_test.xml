@@ -11,7 +11,8 @@
         android:id="@+id/textView11"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.05"
-        android:textSize="15pt" />
+        android:textSize="15pt"
+        android:layout_marginTop="50dp" />
 
     <EditText
         android:layout_width="320dp"
