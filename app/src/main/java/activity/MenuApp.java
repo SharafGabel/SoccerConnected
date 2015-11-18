@@ -19,7 +19,13 @@ public class MenuApp extends Activity  implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageButton b = (ImageButton) this.findViewById(R.id.menu_event);
-        b.setOnClickListener(this);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent secondeActivite = new Intent(MenuApp.this, EventActivity.class);
+                startActivity(secondeActivite);
+            }
+        });
 
     }
 

@@ -11,7 +11,7 @@
 
         <activity
 
-            android:name=".LoginActivity" >
+            android:name="activity.MenuApp" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="activity.MenuApp" >
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
