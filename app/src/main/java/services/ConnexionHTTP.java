@@ -38,7 +38,7 @@ public class ConnexionHTTP {
         return connection;
     }
 
-    public int insertData(String url,String table,HashMap data) throws IOException {
+    public boolean insertData(String url,String table,HashMap data) throws IOException {
 
         HttpURLConnection connection =  this.connect(url);
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
@@ -47,7 +47,11 @@ public class ConnexionHTTP {
         writer.flush();
         writer.close();
 
-        return 0;
+        if(connection.getResponseCode() == HttpURLConnection.HTTP_OK)
+        {
+            return true;
+        }
+        return false;
     }
 
     public String selectionData(String url,String table,HashMap data) throws IOException {

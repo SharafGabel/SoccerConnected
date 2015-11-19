@@ -49,7 +49,7 @@
     <EditText
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:id="@+id/event_place"
+        android:id="@+id/event_lieu"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.05" />
 

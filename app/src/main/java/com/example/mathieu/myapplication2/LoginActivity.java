@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity{
         ad.show();
 
     }
+
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
