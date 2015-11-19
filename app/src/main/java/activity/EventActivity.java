@@ -16,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Objects;
 
 import services.ConnexionHTTP;
 
@@ -29,7 +28,7 @@ public class EventActivity extends AppCompatActivity{
     private ConnexionHTTP connexionHTTP;
     private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/insert_Evenement.php";
     private static final String TABLE = "Event";
-    private HashMap<String,Object> map = new HashMap<String,Object>();
+    private HashMap<String,String> map = new HashMap<String,String>();
     //endregion Attributs
 
     @Override
@@ -37,6 +36,7 @@ public class EventActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
+
         // Récupération des éléments de la vue définis dans le xml
         final EditText nomT = (EditText) findViewById(R.id.event_name);
         final EditText lieuT = (EditText) findViewById(R.id.event_lieu);
@@ -61,6 +61,7 @@ public class EventActivity extends AppCompatActivity{
                     String lieu = lieuT.getText().toString();
                     String dateTemp = dateT.getText().toString();
 
+                    /*
                     //Convertir String date en Date date
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = null;
@@ -68,19 +69,25 @@ public class EventActivity extends AppCompatActivity{
                         date = formatter.parse(dateTemp);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
-                    setParams(nom,lieu,date);
-                    try {
-                        connexionHTTP.insertData(UPDATE_URL,TABLE,map);
-                        createDialog("Création Evenement", "Evenement créé avec succès !");
+                    setParams(nom,lieu,dateTemp);
+                    createDialog("YO",map.toString());
+                    /*try {
+                        if(connexionHTTP.insertData(UPDATE_URL,TABLE,map)) {
+                            createDialog("Création Evenement", "Evenement créé avec succès !");
 
-                        //Retour au menu principal
-                        Intent secondeActivite = new Intent(EventActivity.this, MenuApp.class);
-                        startActivity(secondeActivite);
+                            //Retour au menu principal
+                            Intent secondeActivite = new Intent(EventActivity.this, MenuApp.class);
+                            startActivity(secondeActivite);
+                        }
+                        else
+                        {
+                            createDialog("Création Evenement", "Création de l'évènement échouée");
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                 }
                 else
@@ -90,7 +97,7 @@ public class EventActivity extends AppCompatActivity{
 
         });
 
-        button = (Button) findViewById(R.id.cancelbutton);
+        button = (Button) findViewById(R.id.cancelEvent);
         // Création du listener du bouton cancel (on sort de l'appli)
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -103,7 +110,7 @@ public class EventActivity extends AppCompatActivity{
     }
 
     //region Utils
-    private void setParams(String nom, String lieu, Date date) {
+    private void setParams(String nom, String lieu, String date) {
         map.put("nom", nom);
         map.put("lieu",lieu);
         map.put("date", date);

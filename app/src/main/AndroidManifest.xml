@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity" >
+        <activity android:name="activity.EventActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
             />
-        <activity android:name="activity.EventActivity"
+        <activity android:name="activity.LoginAuth"
             />
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

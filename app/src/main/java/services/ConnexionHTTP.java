@@ -33,8 +33,7 @@ public class ConnexionHTTP {
         URL url = new URL(liensUrl);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setDoOutput(true);
-        connection.setChunkedStreamingMode(0);
-        connection.setRequestMethod("POST");
+        connection.setDoInput(true);
         return connection;
     }
 
@@ -42,7 +41,7 @@ public class ConnexionHTTP {
 
         HttpURLConnection connection =  this.connect(url);
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-        data.put("table",table);
+        //data.put("table",table);
         writer.write(getPostDataString(data));
         writer.flush();
         writer.close();
