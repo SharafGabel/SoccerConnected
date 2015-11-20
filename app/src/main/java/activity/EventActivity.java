@@ -1,8 +1,10 @@
+
 package activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.EditText;
 import com.example.mathieu.myapplication2.R;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,11 +26,13 @@ import services.ConnexionHTTP;
 /**
  * Created by Sharaf on 18/11/2015.
  */
+
 public class EventActivity extends AppCompatActivity{
 
     //region Attributs
     private ConnexionHTTP connexionHTTP;
     private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/insert_Evenement.php";
+    //private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.1.php";
     private static final String TABLE = "Event";
     private HashMap<String,String> map = new HashMap<String,String>();
     //endregion Attributs
@@ -72,29 +78,26 @@ public class EventActivity extends AppCompatActivity{
                     }*/
 
                     setParams(nom,lieu,dateTemp);
-                    createDialog("YO",map.toString());
-                    /*try {
-                        if(connexionHTTP.insertData(UPDATE_URL,TABLE,map)) {
-                            createDialog("Création Evenement", "Evenement créé avec succès !");
+                            try {
+                                if (connexionHTTP.insertData(UPDATE_URL, TABLE, map)) {
+                                    //createDialog("Création Evenement", "Evenement créé avec succès !");
 
-                            //Retour au menu principal
-                            Intent secondeActivite = new Intent(EventActivity.this, MenuApp.class);
-                            startActivity(secondeActivite);
-                        }
-                        else
-                        {
-                            createDialog("Création Evenement", "Création de l'évènement échouée");
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }*/
+                                    //Retour au menu principal
+                                    /*Intent secondeActivite = new Intent(EventActivity.this, MenuApp.class);
+                                    startActivity(secondeActivite);*/
+                                } else {
+                                    createDialog("Création Evenement", "Création de l'évènement échouée");
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
 
                 }
                 else
                     createDialog("Création Evenement", "Création de l'évènement échouée");
 
             }
-
         });
 
         button = (Button) findViewById(R.id.cancelEvent);

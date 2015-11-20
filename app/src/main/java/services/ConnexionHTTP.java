@@ -33,8 +33,14 @@ public class ConnexionHTTP {
         URL url = new URL(liensUrl);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
         connection.setDoInput(true);
         return connection;
+    }
+
+    public void closeHttpConnexion(HttpURLConnection connection)
+    {
+        connection.disconnect();
     }
 
     public boolean insertData(String url,String table,HashMap data) throws IOException {

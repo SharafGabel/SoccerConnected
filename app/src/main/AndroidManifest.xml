@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="activity.EventActivity" >
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
