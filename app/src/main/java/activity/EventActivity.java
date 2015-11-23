@@ -35,6 +35,9 @@ public class EventActivity extends AppCompatActivity{
     //private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.1.php";
     private static final String TABLE = "Event";
     private HashMap<String,String> map = new HashMap<String,String>();
+    private EditText nomT;
+    private EditText lieuT;
+    private EditText dateT;
     //endregion Attributs
 
     @Override
@@ -44,9 +47,9 @@ public class EventActivity extends AppCompatActivity{
         setContentView(R.layout.create_event);
 
         // Récupération des éléments de la vue définis dans le xml
-        final EditText nomT = (EditText) findViewById(R.id.event_name);
-        final EditText lieuT = (EditText) findViewById(R.id.event_lieu);
-        final EditText dateT = (EditText) findViewById(R.id.event_date);
+        nomT = (EditText) findViewById(R.id.event_name);
+        lieuT = (EditText) findViewById(R.id.event_lieu);
+        dateT = (EditText) findViewById(R.id.event_date);
 
         Button button = (Button) findViewById(R.id.createEvent);
 
