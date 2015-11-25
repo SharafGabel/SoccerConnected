@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Nom"
+        android:id="@+id/textView11"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:textSize="15pt"
+        android:layout_marginTop="50dp" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_name"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/textView12"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.04"
+        android:textSize="15pt" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_date"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Lieu"
+        android:id="@+id/textView13"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:textSize="15pt" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_lieu"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Creer"
+        android:id="@+id/createEvent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        android:id="@+id/cancelEvent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
+
+</LinearLayout>
