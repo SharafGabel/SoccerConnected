@@ -1,9 +1,11 @@
 package activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -49,7 +51,27 @@ public class listEvent extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listeEv);
         mListView.setAdapter(adapter);
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+                String data=(String)arg0.getItemAtPosition(arg2);
+               createDialog("test",data);
+
+            }
+        });
+
     }
+
+    private void createDialog(String title, String text)
+    {
+        // Création d'une popup affichant un message
+        AlertDialog ad = new AlertDialog.Builder(this)
+                .setPositiveButton("Ok", null).setTitle(title).setMessage(text)
+                .create();
+        ad.show();
+
+    }
+
 
 
 }
