@@ -28,15 +28,16 @@ public class ConnexionHTTP {
     // selection
     // connexion
 
-    public HttpURLConnection connect(String liensUrl) throws IOException {
-
+    public HttpURLConnection connect(String liensUrl,String method) throws IOException {
+        // methode = "POST" ou "GET"
         URL url = new URL(liensUrl);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setDoOutput(true);
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod(method);
         connection.setDoInput(true);
         return connection;
     }
+
 
     public void closeHttpConnexion(HttpURLConnection connection)
     {
@@ -45,7 +46,7 @@ public class ConnexionHTTP {
 
     public boolean insertData(String url,String table,HashMap data) throws IOException {
 
-        HttpURLConnection connection =  this.connect(url);
+        HttpURLConnection connection =  this.connect(url,"POST");
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
         //data.put("table",table);
         writer.write(getPostDataString(data));
@@ -61,7 +62,7 @@ public class ConnexionHTTP {
 
     public String selectionData(String url,String table,HashMap data) throws IOException {
 
-        HttpURLConnection connection =  this.connect(url);
+        HttpURLConnection connection =  this.connect(url,"GET");
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
         data.put("table",table);
         writer.write(getPostDataString(data));

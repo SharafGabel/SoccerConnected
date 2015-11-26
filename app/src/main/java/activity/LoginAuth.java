@@ -30,12 +30,4 @@ public class LoginAuth extends AppCompatActivity {
 
     }
 
-    public void onClick(View v) {
-        if (v == this.findViewById(R.id.connectB)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-
-        }
-
-    }
 }
