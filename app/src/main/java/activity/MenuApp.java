@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.mathieu.myapplication2.R;
@@ -24,7 +23,7 @@ public class MenuApp extends Activity  implements View.OnClickListener {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent secondeActivite = new Intent(MenuApp.this, listEvent.class);
+                Intent secondeActivite = new Intent(MenuApp.this, listEventActivity.class);
                 startActivity(secondeActivite);
             }
         });
@@ -35,7 +34,7 @@ public class MenuApp extends Activity  implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == this.findViewById(R.id.menu_event)) {
-            Intent intent = new Intent(MenuApp.this, listEvent.class);
+            Intent intent = new Intent(MenuApp.this, listEventActivity.class);
             startActivity(intent);
         }
     }

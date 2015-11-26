@@ -131,12 +131,12 @@ public class EventActivity_V2 extends AppCompatActivity implements View.OnClickL
                             sb.append(line);
                         }
                         json = sb.toString();
-                        createDialog("toto",json);
+                        createDialog("Evènement","Création d'évènement réussi");
                     }
                     else
                     {
                         json="Erreur ";
-                        createDialog("toto","erreur");
+                        createDialog("Evènement","Création d'évènement échouée");
                     }
 
                 } catch (IOException e) {

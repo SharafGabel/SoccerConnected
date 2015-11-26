@@ -168,6 +168,7 @@ public class LoginActivity extends AppCompatActivity{
                     HttpURLConnection connection = (HttpURLConnection)url.openConnection();
                     connection.setDoOutput(true);
                     connection.setDoInput(true);
+                    connection.setRequestMethod("GET");
                     /*A ne jamais mettre lorsque l'on récupère des données json*/
                     //connection.setChunkedStreamingMode(0);
                     /*OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
