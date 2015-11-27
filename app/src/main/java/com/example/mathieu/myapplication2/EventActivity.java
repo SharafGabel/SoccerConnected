@@ -1,5 +1,5 @@
 
-package activity;
+package com.example.mathieu.myapplication2;
 
 import android.app.Activity;
 import android.content.Intent;

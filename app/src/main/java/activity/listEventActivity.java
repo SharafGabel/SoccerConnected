@@ -37,7 +37,7 @@ public class listEventActivity extends AppCompatActivity {
     private static final String TABLE = "Event";
     private HashMap<String,String> map = new HashMap<String,String>();
     private List<String> listeEv;
-    private String jsonString = "{\"events\":[{\"id\":1,\"nom\":\"mathieu party\",\"lieu\":\"livry-gargan\",\"date\":\"20-12-2056\"},{\"id\":2,\"nom\":\"test\",\"lieu\":\"test\",\"date\":\"test\"}]}";
+    private String jsonString; //= "{\"events\":[{\"id\":1,\"nom\":\"mathieu party\",\"lieu\":\"livry-gargan\",\"date\":\"20-12-2056\"},{\"id\":2,\"nom\":\"test\",\"lieu\":\"test\",\"date\":\"test\"}]}";
     //private ArrayList<HashMap<String,String>> listeEv;
     ListView mListView;
 
@@ -48,20 +48,6 @@ public class listEventActivity extends AppCompatActivity {
         setContentView(R.layout.listevent);
         mListView = (ListView) findViewById(R.id.listViewEvent);
         getEvents();
-        //  listeEv = connexionHTTP.selectionData(LIST_EVENT_URL,TABLE,map);
-        /*listeEv = new ArrayList<String>();
-        listeEv.add("Event1");
-        listeEv.add("Event2");*/
-
-       /* mListView = (ListView) findViewById(R.id.listViewEvent);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(listEventActivity.this,
-                android.R.layout.simple_list_item_1, listeEv);
-    */
-        /*mListView = (ListView) this.findViewById(R.id.listViewEvent);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listeEv);
-        mListView.setAdapter(adapter);*/
-
     }
 
     private void getEvents() {
@@ -95,6 +81,7 @@ public class listEventActivity extends AppCompatActivity {
                         }
                         json = sb.toString();
                         jsonString = json;
+                        initList();
 
                         try {
                             HashMap<String, String> map = new HashMap<String, String>();
@@ -109,16 +96,6 @@ public class listEventActivity extends AppCompatActivity {
                             }
                             List<HashMap<String, String>> data = new ArrayList<>();
                             data.add(map);
-                            /*JSONObject jObject = new JSONObject(json);
-                            Iterator<?> keys = jObject.keys();
-
-                            while( keys.hasNext() ){
-                                String key = (String)keys.next();
-                                String value = jObject.getString(key);
-                                listeEv.add(key);
-                                listeEv.add(value);
-
-                            }*/
                            createDialog("Evènement",map.toString());
                         }
                         catch (JSONException e) {
@@ -142,13 +119,18 @@ public class listEventActivity extends AppCompatActivity {
         };
 
         t.start();
-
-        initList();
-        SimpleAdapter simpleAdapter = new SimpleAdapter(listEventActivity.this, events, android.R.layout.simple_list_item_1, new String[] {"events"}, new int[] {android.R.id.text1});
-        mListView.setAdapter(simpleAdapter);
+        if(t.isAlive()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            SimpleAdapter simpleAdapter = new SimpleAdapter(listEventActivity.this, events, android.R.layout.simple_list_item_1, new String[]{"events"}, new int[]{android.R.id.text1});
+            mListView.setAdapter(simpleAdapter);
+        }
     }
 
-    //region test
+    //region JsonStringToListView
     List<Map<String,String>> events = new ArrayList<Map<String,String>>();
     private void initList(){
 
@@ -176,7 +158,7 @@ public class listEventActivity extends AppCompatActivity {
         eventsNameNo.put(name, number);
         return eventsNameNo;
     }
-    //endregion test
+    //endregion JsonStringToListView
 
     //region Utils
 
