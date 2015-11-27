@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.example.mathieu.myapplication2.R;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Yacine on 26/11/2015.
@@ -30,11 +32,12 @@ import java.util.List;
 public class listEventActivity extends AppCompatActivity {
     //private ConnexionHTTP connexionHTTP;
     //private static final String	LIST_EVENT_URL	= "https://footapp-sharaf.c9users.io/get_Evenement.php";
-    private static final String	LIST_EVENT_URL	= "https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events/1";
+    private static final String	LIST_EVENT_URL	= "https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events";
     //private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.1.php";
     private static final String TABLE = "Event";
     private HashMap<String,String> map = new HashMap<String,String>();
     private List<String> listeEv;
+    private String jsonString = "{\"events\":[{\"id\":1,\"nom\":\"mathieu party\",\"lieu\":\"livry-gargan\",\"date\":\"20-12-2056\"},{\"id\":2,\"nom\":\"test\",\"lieu\":\"test\",\"date\":\"test\"}]}";
     //private ArrayList<HashMap<String,String>> listeEv;
     ListView mListView;
 
@@ -43,6 +46,7 @@ public class listEventActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listevent);
+        mListView = (ListView) findViewById(R.id.listViewEvent);
         getEvents();
         //  listeEv = connexionHTTP.selectionData(LIST_EVENT_URL,TABLE,map);
         /*listeEv = new ArrayList<String>();
@@ -90,6 +94,8 @@ public class listEventActivity extends AppCompatActivity {
                             sb.append(line);
                         }
                         json = sb.toString();
+                        jsonString = json;
+
                         try {
                             HashMap<String, String> map = new HashMap<String, String>();
                             JSONObject jObject = new JSONObject(json);
@@ -113,25 +119,7 @@ public class listEventActivity extends AppCompatActivity {
                                 listeEv.add(value);
 
                             }*/
-                            //listeEv.add(list);
-                            /*ArrayList<String> listdata = new ArrayList<String>();
-                            //JSONObject jObject = new JSONObject(json);
-                            JSONArray jArray = new JSONArray(json);
-                            if (jArray != null) {
-                                for (int i=0;i<jArray.length();i++){
-                                    listdata.add(jArray.get(i).toString());
-                                }
-                            }*/
-
-                            /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(listEventActivity.this, android.R.layout.simple_list_item_1, listeEv);
-                            mListView.setAdapter(adapter);*/
-
-
-                            /*mListView = (ListView) listEventActivity.this.findViewById(R.id.listViewEvent);
-                            SimpleAdapter simpleAdapter = new SimpleAdapter(listEventActivity.this, (List<? extends Map<String, ?>>) map, android.R.layout.simple_list_item_1, new String[] {"country"}, new int[] {android.R.id.text1});
-                            */
-                            createDialog("Evènement",map.toString());
-
+                           createDialog("Evènement",map.toString());
                         }
                         catch (JSONException e) {
                             e.printStackTrace();
@@ -154,8 +142,42 @@ public class listEventActivity extends AppCompatActivity {
         };
 
         t.start();
+
+        initList();
+        SimpleAdapter simpleAdapter = new SimpleAdapter(listEventActivity.this, events, android.R.layout.simple_list_item_1, new String[] {"events"}, new int[] {android.R.id.text1});
+        mListView.setAdapter(simpleAdapter);
     }
-/*
+
+    //region test
+    List<Map<String,String>> events = new ArrayList<Map<String,String>>();
+    private void initList(){
+
+        try{
+            JSONObject jsonResponse = new JSONObject(jsonString);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("events");
+
+            for(int i = 0; i<jsonMainNode.length();i++){
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                String id = jsonChildNode.optString("id");
+                String nom = jsonChildNode.optString("nom");
+                String date = jsonChildNode.optString("date");
+                String lieu = jsonChildNode.optString("lieu");
+                String outPut = nom + "-" +id +"-" +date +"-" +lieu;
+                events.add(createEmployee("events", outPut));
+            }
+        }
+        catch(JSONException e){
+            Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private HashMap<String, String>createEmployee(String name,String number){
+        HashMap<String, String> eventsNameNo = new HashMap<String, String>();
+        eventsNameNo.put(name, number);
+        return eventsNameNo;
+    }
+    //endregion test
+
     //region Utils
 
 
@@ -193,7 +215,7 @@ public class listEventActivity extends AppCompatActivity {
     }
 
     //endregion Utils
-*/
+
     //region UtilsActivity
     private void createDialog(String title, String text)
     {
