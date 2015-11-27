@@ -1,4 +1,4 @@
-package com.example.mathieu.myapplication2;
+package activity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+
+import com.example.mathieu.myapplication2.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;

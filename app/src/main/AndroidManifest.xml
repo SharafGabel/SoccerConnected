@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="activity.EventActivity_V2" >
+        <activity android:name=".EventActivity_V2" >
 
         </activity>
             />
