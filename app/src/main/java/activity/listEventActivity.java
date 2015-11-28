@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class listEventActivity extends AppCompatActivity {
 
-    private static final String	LIST_EVENT_URL	= "https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events";
+    private static final String	LIST_EVENT_URL= "https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events";
     private String jsonString;
     List<Map<String,String>> events = new ArrayList<Map<String,String>>();
     ListView mListView;
