@@ -1,9 +1,13 @@
 package activity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -34,7 +38,11 @@ public class listEventActivity extends AppCompatActivity {
     private static final String	LIST_EVENT_URL= "https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events";
     private String jsonString;
     List<Map<String,String>> events = new ArrayList<Map<String,String>>();
+    List<String> idEvent = new ArrayList<String>();
     ListView mListView;
+
+    public ProgressDialog progressDialog ;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,11 +50,30 @@ public class listEventActivity extends AppCompatActivity {
         setContentView(R.layout.listevent);
         mListView = (ListView) findViewById(R.id.listViewEvent);
         getEvents();
+
+        progressDialog =  new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(true);
+
+        // appel de detailActivity pour le details d'un evenement
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> simpleAdapter, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(listEventActivity.this, detailActivity.class);
+                String message = idEvent.get(position);
+                intent.putExtra("ID", message);
+                startActivity(intent);
+            }
+        });
+
     }
 
     //region getEvents
     private void getEvents() {
         //Création d'un thread
+
         Thread t = new Thread()
         {
             public void run()
@@ -71,6 +98,9 @@ public class listEventActivity extends AppCompatActivity {
         mListView.setAdapter(simpleAdapter);
     }
     //endregion getEvents
+
+
+
 
     //region Utils
 
@@ -118,7 +148,8 @@ public class listEventActivity extends AppCompatActivity {
                 String lieu = jsonChildNode.optString("lieu");
                 String outPut = nom + "-" +id +"-" +date +"-" +lieu;
                 events.add(createEvents("events", outPut));
-            }
+                idEvent.add(id);
+;            }
         }
         catch(JSONException e){
             Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
@@ -146,6 +177,10 @@ public class listEventActivity extends AppCompatActivity {
 
     }
     //endregion UtilsActivity
+
+
+
+
 
 }
 

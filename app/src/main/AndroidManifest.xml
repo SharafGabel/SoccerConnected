@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".EventActivity_V2" >
+        <activity android:name="activity.detailActivity" >
 
         </activity>
             />
@@ -30,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
            </activity>
-        <activity android:name="activity.listEventActivity"/>
+        <activity android:name="activity.listEventActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>
