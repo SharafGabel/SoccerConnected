@@ -71,7 +71,8 @@ public class listEventActivity extends AppCompatActivity {
     }
 
     //region getEvents
-    private void getEvents() {
+    private void getEvents()
+    {
         //Création d'un thread
 
         Thread t = new Thread()

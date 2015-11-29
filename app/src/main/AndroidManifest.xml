@@ -9,28 +9,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity
-
-            android:name="activity.MenuApp" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity android:name="activity.listEventActivity" >
         </activity>
 
         <activity android:name="activity.detailActivity" >
 
         </activity>
-            />
-        <activity android:name="activity.LoginAuth">
+
+        <activity android:name="activity.LoginAuth" >
+
+        </activity>
+
+        <activity android:name="activity.MenuApp" >
+
+        </activity>
+
+        <activity android:name="activity.AddUser">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
            </activity>
-        <activity android:name="activity.listEventActivity"></activity>
+
+
+
+
+
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>
