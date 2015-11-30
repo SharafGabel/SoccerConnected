@@ -21,6 +21,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,7 +33,6 @@ import java.net.URL;
 public class detailActivity extends AppCompatActivity {
 
     private static  String	DETAILS_URL;
-    private static final String TABLE = "Event";
     private String jsonString;
     public ProgressDialog progressDialog ;
 
@@ -38,55 +41,61 @@ public class detailActivity extends AppCompatActivity {
     private String date;
     private String location;
 
-
+    private TextView nomTV;
+    private TextView dateTV;
+    private TextView locationTV;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("ID");
             idEvent = value;
         }
+        else
+        {
+            idEvent ="2";
+        }
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.detailsevent);
+        findViewsByID();
 
-
-        progressDialog =  new ProgressDialog(detailActivity.this);
+        /*progressDialog =  new ProgressDialog(detailActivity.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
-        //progressDialog.show();
+        progressDialog.show();*/
         getEventDetails();
-
-        setContentView(R.layout.detailsevent);
-
 
     }
 
     private void getEventDetails() {
         //Création d'un thread
-
-
         Thread t = new Thread() {
             public void run() {
                 Looper.prepare();
                 getJson();
-                getParameterDetails();
+                initDetails();
                 Looper.loop();
             }
-
         };
         t.start();
+
+        if(!t.isInterrupted())
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        setViewsByID();
     }
 
     private void getJson() {
-
-
-
             try{
-                DETAILS_URL = "https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events/"+idEvent;
+                DETAILS_URL="https://footapp-sharaf.c9users.io/ConnectedSoccerPhp/web/api/events/"+idEvent;
                 URL url = new URL(DETAILS_URL);
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
                 connection.setDoInput(true);
@@ -103,6 +112,7 @@ public class detailActivity extends AppCompatActivity {
                     }
                     jsonString = sb.toString();
                 }
+                //connection.disconnect();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (ProtocolException e) {
@@ -110,10 +120,9 @@ public class detailActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
     }
 
+    //region UtilsActivity
     private void createDialog(String title, String text)
     {
         // Création d'une popup affichant un message
@@ -121,35 +130,41 @@ public class detailActivity extends AppCompatActivity {
                 .setPositiveButton("Ok", null).setTitle(title).setMessage(text)
                 .create();
         ad.show();
-
     }
 
-    private void getParameterDetails(){
+    private void findViewsByID()
+    {
+        nomTV = (TextView) findViewById(R.id.name);
+        locationTV = (TextView) findViewById(R.id.location);
+        dateTV = (TextView) findViewById(R.id.date);
+    }
 
+    private void setViewsByID()
+    {
+        nomTV.setText(nom);
+        dateTV.setText(date);
+        locationTV.setText(location);
+    }
+
+    //endregion UtilsActivity
+
+    //region JsonStringToTextView
+    private void initDetails(){
         try{
-
-
             JSONObject jsonResponse = new JSONObject(jsonString);
-            /*
-            this.nom = jsonResponse.getJSONObject("event").getString("nom");
-            this.date = jsonResponse.getJSONObject("event").getString("date");
-            this.location = jsonResponse.getJSONObject("event").getString("lieu");
-
-          // final TextView nameView = (TextView) findViewById(R.id.name);
-            //nameView.setText("test");
-
-            TextView lieuVieuw = (TextView) findViewById(R.id.location);
-            lieuVieuw.setText(nom);
-            TextView dateView = (TextView) findViewById(R.id.date);
-            dateView.setText(nom);
-            */
+            JSONObject jsonMainNode = jsonResponse.optJSONObject("event");
+            String id = jsonMainNode.optString("id");
+            nom = jsonMainNode.optString("nom");
+            date = jsonMainNode.optString("date");
+            location = jsonMainNode.optString("lieu");
+            String output=  id+"-"+nom+"-"+date+"-"+location;
+            createDialog("Event sélectionné",output);
 
         }
         catch(JSONException e){
-            Toast.makeText(getApplicationContext(), "Error" + e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
         }
-
     }
-
+    //endregion JsonStringToTextView
 
 }

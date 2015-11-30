@@ -16,7 +16,7 @@
 
         </activity>
 
-        <activity android:name="activity.LoginAuth" >
+        <activity android:name="activity.MainActivity" >
 
         </activity>
 
@@ -24,7 +24,7 @@
 
         </activity>
 
-        <activity android:name="activity.AddUser">
+        <activity android:name="activity.LoginAuth">
             <intent-filter>
 
                 <action android:name="android.intent.action.MAIN" />
