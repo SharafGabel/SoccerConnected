@@ -1,10 +1,13 @@
 package activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +70,18 @@ public class detailActivity extends AppCompatActivity {
         progressDialog.setCancelable(true);
         progressDialog.show();*/
         getEventDetails();
+
+
+        Button b = (Button) this.findViewById(R.id.addPlayer);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAddPlayer = new Intent(detailActivity.this, searchPlayer.class);
+                String message = idEvent;
+                intentAddPlayer.putExtra("ID_EVENT", message);
+                startActivity(intentAddPlayer);
+            }
+        });
 
     }
 
