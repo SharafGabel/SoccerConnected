@@ -20,7 +20,7 @@ public class searchPlayer extends AppCompatActivity {
             this.idEvent = value;
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detailsevent);
+        setContentView(R.layout.searchplayer);
     }
 
 
