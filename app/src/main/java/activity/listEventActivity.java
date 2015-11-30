@@ -145,7 +145,7 @@ public class listEventActivity extends AppCompatActivity {
                 String nom = jsonChildNode.optString("nom");
                 String date = jsonChildNode.optString("date");
                 String lieu = jsonChildNode.optString("lieu");
-                String outPut = nom + "-" +id +"-" +date +"-" +lieu;
+                String outPut = nom +" "+date +" à " +lieu;
                 events.add(createEvents("events", outPut));
                 idEvent.add(id);
 ;            }

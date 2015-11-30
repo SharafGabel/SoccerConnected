@@ -173,7 +173,6 @@ public class detailActivity extends AppCompatActivity {
             date = jsonMainNode.optString("date");
             location = jsonMainNode.optString("lieu");
             String output=  id+"-"+nom+"-"+date+"-"+location;
-            createDialog("Event sélectionné",output);
 
         }
         catch(JSONException e){
