@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.mathieu.myapplication2.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,10 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -55,10 +50,6 @@ public class detailActivity extends AppCompatActivity {
         if (extras != null) {
             String value = extras.getString("ID");
             idEvent = value;
-        }
-        else
-        {
-            idEvent ="2";
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailsevent);

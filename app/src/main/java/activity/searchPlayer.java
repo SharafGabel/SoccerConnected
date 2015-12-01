@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.mathieu.myapplication2.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +39,7 @@ public class searchPlayer extends AppCompatActivity {
     private SearchView search;
     private static String URL_RESEARCH_PLAYER;
     private ListView listeResult;
-    private List<String> resultSearch;
+    private List<Map<String,String>> resultSearch = new ArrayList<>();
     private List<String> resultID;
 
 
@@ -82,7 +85,6 @@ public class searchPlayer extends AppCompatActivity {
     private void serachThread(final String recherche)
     {
 
-
         Thread t = new Thread() {
             public void run() {
                 Looper.prepare();
@@ -100,6 +102,9 @@ public class searchPlayer extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, resultSearch, android.R.layout.simple_list_item_1, new String[]{"users"}, new int[]{android.R.id.text1});
+        listeResult.setAdapter(simpleAdapter);
     }
 
     private void searchPlayerDb(String recherche)
@@ -111,10 +116,6 @@ public class searchPlayer extends AppCompatActivity {
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
-
-                    /*A ne jamais mettre lorsque l'on récupère des données json*/
-            //connection.setChunkedStreamingMode(0);
-
 
             HashMap<String,String> map = new HashMap<String,String>();
             map.put("username",recherche);
@@ -178,26 +179,38 @@ public class searchPlayer extends AppCompatActivity {
         return result.toString();
     }
 
+
+
+
+//region JsonStringToListView
+
     private void initDetails(String jsonString){
         try{
             //
-             JSONObject jsonResponse = new JSONObject(jsonString);
-            JSONObject jsonMainNode = jsonResponse.optJSONObject("users");
+            JSONObject jsonResponse = new JSONObject(jsonString);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
 
-            //String username = jsonMainNode.optString("username");
-            //String id = jsonMainNode.optString("id");
+            for(int i = 0; i<jsonMainNode.length();i++){
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                String id = jsonChildNode.optString("id");
+                String username = jsonChildNode.optString("username");
+                String outPut = username +" id : " +id;
+                resultSearch.add(createPlayer("users", outPut));
+            }
 
             createDialog("test",jsonString);
             //createDialog("test2",jsonMainNode);
-
-            //this.resultSearch
         }
         catch(JSONException e){
             Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
-
-
+    private HashMap<String, String>createPlayer(String name,String number){
+        HashMap<String, String> playersNameNo = new HashMap<String, String>();
+        playersNameNo.put(name, number);
+        return playersNameNo;
+    }
+//endregion JsonStringToListView
 
 }
