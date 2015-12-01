@@ -103,8 +103,9 @@ public class searchPlayer extends AppCompatActivity {
             }
         }
 
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, resultSearch, android.R.layout.simple_list_item_1, new String[]{"users"}, new int[]{android.R.id.text1});
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, resultSearch, android.R.layout.simple_list_item_multiple_choice, new String[]{"users"}, new int[]{android.R.id.text1});
         listeResult.setAdapter(simpleAdapter);
+        listeResult.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 
     private void searchPlayerDb(String recherche)
