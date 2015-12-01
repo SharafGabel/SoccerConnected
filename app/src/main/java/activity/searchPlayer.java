@@ -40,7 +40,7 @@ public class searchPlayer extends AppCompatActivity {
     private static String URL_RESEARCH_PLAYER;
     private ListView listeResult;
     private List<Map<String,String>> resultSearch = new ArrayList<>();
-    private List<String> resultID;
+    private List<String> resultID = new ArrayList<>();
 
 
     @Override
@@ -196,6 +196,7 @@ public class searchPlayer extends AppCompatActivity {
                 String username = jsonChildNode.optString("username");
                 String outPut = username +" id : " +id;
                 resultSearch.add(createPlayer("users", outPut));
+                resultID.add(id);
             }
 
             createDialog("test",jsonString);
