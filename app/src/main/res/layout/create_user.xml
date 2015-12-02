@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Nom d'utilisateur : "
+        android:id="@+id/textView_create_user_1"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:textSize="15pt"
+        android:layout_marginTop="50dp" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_user_username"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Email : "
+        android:id="@+id/textView_create_user_2"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.04"
+        android:textSize="15pt" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_user_email"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Mot de Passe : "
+        android:id="@+id/textView_create_user_3"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:textSize="15pt" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_user_password"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Valider"
+        android:id="@+id/create_user_button_1"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        android:id="@+id/create_user_button_2"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
+</LinearLayout>
