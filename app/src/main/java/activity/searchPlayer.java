@@ -190,7 +190,7 @@ public class searchPlayer extends AppCompatActivity {
             //
             JSONObject jsonResponse = new JSONObject(jsonString);
             JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
-
+            resultSearch = new ArrayList<>();
             for(int i = 0; i<jsonMainNode.length();i++){
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 String id = jsonChildNode.optString("id");
