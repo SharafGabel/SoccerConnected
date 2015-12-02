@@ -12,6 +12,9 @@
         <activity android:name="activity.listEventActivity" >
         </activity>
 
+        <activity android:name="activity.createUser" >
+        </activity>
+
         <activity android:name="activity.EventActivity_V2" >
         </activity>
 

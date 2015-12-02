@@ -199,9 +199,7 @@ public class searchPlayer extends AppCompatActivity {
                 resultSearch.add(createPlayer("users", outPut));
                 resultID.add(id);
             }
-
             createDialog("test",jsonString);
-            //createDialog("test2",jsonMainNode);
         }
         catch(JSONException e){
             Toast.makeText(getApplicationContext(), "Error"+e.toString(), Toast.LENGTH_SHORT).show();
