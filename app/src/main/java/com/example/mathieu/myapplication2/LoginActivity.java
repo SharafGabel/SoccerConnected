@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mathieu.myapplication2.R;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -42,7 +44,9 @@ import javax.xml.parsers.SAXParserFactory;
 public class LoginActivity extends AppCompatActivity{
 
     // Lien vers votre page php sur votre serveur
-    private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.1.php";
+    //private static final String	UPDATE_URL	= "https://footapp-sharaf.c9users.io/login.1.php";
+    private static final String	UPDATE_URL	= "http://mathieu-lioret.fr/ConnectedSoccerPhp/web/users";
+    //private static final String UPDATE_URL = "http://demos.tricksofit.com/files/json.php";
 
     public ProgressDialog progressDialog;
 
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.main);
 
         // initialisation d'une progress bar
-       progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
@@ -130,6 +134,7 @@ public class LoginActivity extends AppCompatActivity{
         ad.show();
 
     }
+
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
@@ -162,10 +167,11 @@ public class LoginActivity extends AppCompatActivity{
                     URL url = new URL(UPDATE_URL);
                     HttpURLConnection connection = (HttpURLConnection)url.openConnection();
                     connection.setDoOutput(true);
-                    connection.setChunkedStreamingMode(0);
-                    connection.setRequestMethod("POST");
-
-                    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                    connection.setDoInput(true);
+                    connection.setRequestMethod("GET");
+                    /*A ne jamais mettre lorsque l'on récupère des données json*/
+                    //connection.setChunkedStreamingMode(0);
+                    /*OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
                     HashMap<String,String> map = new HashMap<String,String>();
                     map.put("username", login);
@@ -173,7 +179,7 @@ public class LoginActivity extends AppCompatActivity{
                     writer.write(getPostDataString(map));
 
                     writer.flush();
-                    writer.close();
+                    writer.close();*/
                     String json;
                     int responseCode = connection.getResponseCode();
                     if(responseCode == HttpURLConnection.HTTP_OK)
@@ -187,7 +193,6 @@ public class LoginActivity extends AppCompatActivity{
                         }
                         json = sb.toString();
                         createDialog("toto",json);
-
                     }
                     else
                     {

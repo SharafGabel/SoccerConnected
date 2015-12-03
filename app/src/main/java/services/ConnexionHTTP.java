@@ -1,4 +1,4 @@
-package com.example.mathieu.myapplication2;
+package services;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
@@ -28,31 +28,41 @@ public class ConnexionHTTP {
     // selection
     // connexion
 
-    public HttpURLConnection connect(String liensUrl) throws IOException {
-
+    public HttpURLConnection connect(String liensUrl,String method) throws IOException {
+        // methode = "POST" ou "GET"
         URL url = new URL(liensUrl);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setDoOutput(true);
-        connection.setChunkedStreamingMode(0);
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod(method);
+        connection.setDoInput(true);
         return connection;
     }
 
-    public int insertData(String url,String table,HashMap data) throws IOException {
 
-        HttpURLConnection connection =  this.connect(url);
+    public void closeHttpConnexion(HttpURLConnection connection)
+    {
+        connection.disconnect();
+    }
+
+    public boolean insertData(String url,String table,HashMap data) throws IOException {
+
+        HttpURLConnection connection =  this.connect(url,"POST");
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-        data.put("table",table);
+        //data.put("table",table);
         writer.write(getPostDataString(data));
         writer.flush();
         writer.close();
 
-        return 0;
+        if(connection.getResponseCode() == HttpURLConnection.HTTP_OK)
+        {
+            return true;
+        }
+        return false;
     }
 
     public String selectionData(String url,String table,HashMap data) throws IOException {
 
-        HttpURLConnection connection =  this.connect(url);
+        HttpURLConnection connection =  this.connect(url,"GET");
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
         data.put("table",table);
         writer.write(getPostDataString(data));
